@@ -484,6 +484,57 @@ tbody tr.row-kendala  td:first-child { border-left: 3px solid #ef4444; }
 }
 .check-label:hover::after { opacity: 1; }
 
+/* ─── DASHBOARD SECTION ─── */
+.dashboard-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.dash-kpi-main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.dash-kpi-main .summary-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: none;
+    border-top: 4px solid transparent;
+}
+
+.dash-breakdown {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.dash-breakdown-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: #f8fafc;
+}
+
+.dash-breakdown-header h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-1);
+}
+
+.dash-breakdown-header p {
+    font-size: 0.75rem;
+    color: var(--text-4);
+    margin-top: 0.2rem;
+}
+
+.dash-breakdown .summary-grid {
+    grid-template-columns: repeat(5, 1fr);
+    border-bottom: none;
+}
+
 /* ─── SUMMARY GRID ─── */
 .summary-grid {
     display: grid;
@@ -548,6 +599,8 @@ tbody tr.row-kendala  td:first-child { border-left: 3px solid #ef4444; }
 }
 
 /* Card accent colours */
+.sc-belum-total { border-top-color: #ef4444; } .sc-belum-total .sc-count { color: #dc2626; }
+.sc-belum-total .sc-icon { background: #fee2e2; color: #dc2626; }
 .sc-total  { border-top-color: #6366f1; } .sc-total  .sc-count { color: #6366f1; }
 .sc-belum  { border-top-color: #94a3b8; } .sc-belum  .sc-count { color: #475569; }
 .sc-proses { border-top-color: #f59e0b; } .sc-proses  .sc-count { color: #d97706; }
@@ -557,8 +610,17 @@ tbody tr.row-kendala  td:first-child { border-left: 3px solid #ef4444; }
 .sc-tolak  { border-top-color: #ef4444; } .sc-tolak   .sc-count { color: #dc2626; }
 
 /* ─── RESPONSIVE GRID ─── */
-@media (max-width: 1100px) { .summary-grid { grid-template-columns: repeat(4, 1fr); } .summary-card { border-bottom: 1px solid var(--border); } }
-@media (max-width: 640px)  { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1100px) { 
+    .summary-grid { grid-template-columns: repeat(4, 1fr); } 
+    .dash-kpi-main { grid-template-columns: repeat(3, 1fr); }
+    .dash-breakdown .summary-grid { grid-template-columns: repeat(3, 1fr); }
+    .summary-card { border-bottom: 1px solid var(--border); } 
+}
+@media (max-width: 640px)  { 
+    .summary-grid { grid-template-columns: repeat(2, 1fr); } 
+    .dash-kpi-main { grid-template-columns: 1fr; }
+    .dash-breakdown .summary-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
 /* ─── RESPONSIVE TABLE ─── */
 @media (max-width: 768px) {

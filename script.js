@@ -242,6 +242,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('sc-verif').textContent    = count('perlu_verif');
         document.getElementById('sc-tolak').textContent    = count('tolak');
 
+        const totalBelum = count('belum') + count('menunggu') + count('error_web') + count('perlu_verif') + count('tolak');
+        const elBelumTotal = document.getElementById('sc-belum-total');
+        if (elBelumTotal) elBelumTotal.textContent = totalBelum;
+
         applyView();
     }
 
