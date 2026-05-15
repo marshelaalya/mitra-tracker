@@ -139,15 +139,15 @@ body {
 .btn-export {
     display: inline-flex; align-items: center; gap: 0.4rem;
     padding: 0.4rem 0.9rem;
-    background: #f0fdf4;
-    color: #15803d;
-    border: 1px solid #86efac;
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
     border-radius: var(--radius-sm);
     font-size: 0.75rem; font-weight: 600; font-family: inherit;
     cursor: pointer;
     transition: all 0.15s;
 }
-.btn-export:hover { background: #dcfce7; }
+.btn-export:hover { background: #d1fae5; }
 
 /* ─── SEARCH & FILTER BAR ─── */
 .search-filter-bar {

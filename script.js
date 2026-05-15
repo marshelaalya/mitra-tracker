@@ -283,67 +283,41 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStats();
     });
 
+    /* ── Export Excel ── */
+    document.getElementById('btn-export-excel')?.addEventListener('click', () => {
+        const data = [];
+        data.push(['No', 'Nama Mitra', 'Nomor HP', 'Status', 'Kendala']);
+        
+        rows.forEach((r, idx) => {
+            const phone = r.dataset.phone;
+            const name = r.querySelector('.td-name').textContent.trim();
+            const phoneStr = r.querySelector('.td-phone').textContent.trim();
+            const state = getState(phone);
+            
+            let statusLabel = 'Belum Dihubungi';
+            if (state.status === 'menunggu') statusLabel = 'Menunggu Balasan';
+            else if (state.status === 'sudah_konfirm') statusLabel = 'Selesai';
+            else if (state.status === 'perlu_verif') statusLabel = 'Perlu Verifikasi';
+            else if (state.status === 'error_web') statusLabel = 'Kendala Akses Web';
+            else if (state.status === 'tolak') statusLabel = 'Cek Sistem Sobat';
+            
+            let kendalaLabel = 'Tidak Ada Kendala';
+            const opt = OPTS.find(o => o.value === state.kendala);
+            if (opt && opt.value !== '') kendalaLabel = opt.label;
+            
+            data.push([idx + 1, name, phoneStr, statusLabel, kendalaLabel]);
+        });
+
+        const ws = XLSX.utils.aoa_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Status Mitra");
+        XLSX.writeFile(wb, "Status_Mitra_SE2026.xlsx");
+    });
+
     /* ── Reset Semua ── */
     document.getElementById('btn-reset-all')?.addEventListener('click', () => {
         if (!confirm('Reset semua status ke "Belum Dihubungi"?')) return;
         rows.forEach(r => { localStorage.removeItem('mt_' + r.dataset.phone); renderRow(r); });
         updateStats();
-    });
-
-    /* ── Export Excel ── */
-    document.getElementById('btn-export-excel')?.addEventListener('click', () => {
-        const statusLabel = {
-            belum:         'Belum Dihubungi',
-            menunggu:      'Menunggu Balasan',
-            sudah_konfirm: 'Terkonfirmasi ✓',
-            perlu_verif:   'Perlu Verifikasi',
-            error_web:     'Kendala Akses Web',
-            tolak:         'Tawaran Belum Muncul',
-        };
-        const kendalaLabel = {
-            '':           'Tidak Ada',
-            perlu_verif:  'Perlu Verifikasi',
-            error_web:    'Belum Bisa Akses Web',
-            tolak:        'Tawaran Belum Muncul di Sobat',
-        };
-
-        // Header row
-        const wsData = [
-            ['No', 'Nama Mitra', 'Nomor HP', 'Status', 'Kendala']
-        ];
-
-        // Data rows
-        rows.forEach((tr, i) => {
-            const phone  = tr.dataset.phone;
-            const name   = tr.querySelector('.td-name').textContent.trim();
-            const state  = getState(phone);
-            const phone_display = formatPhone(phone);
-            wsData.push([
-                i + 1,
-                name,
-                phone_display,
-                statusLabel[state.status] || state.status,
-                kendalaLabel[state.kendala] || state.kendala || 'Tidak Ada',
-            ]);
-        });
-
-        // Buat workbook
-        const wb = XLSX.utils.book_new();
-        const ws = XLSX.utils.aoa_to_sheet(wsData);
-
-        // Lebar kolom otomatis
-        ws['!cols'] = [
-            { wch: 5 },   // No
-            { wch: 28 },  // Nama
-            { wch: 20 },  // Nomor HP
-            { wch: 22 },  // Status
-            { wch: 30 },  // Kendala
-        ];
-
-        XLSX.utils.book_append_sheet(wb, ws, 'Mitra SE 2026');
-
-        // Nama file pakai tanggal hari ini
-        const today = new Date().toISOString().slice(0, 10);
-        XLSX.writeFile(wb, `Mitra_SE2026_${today}.xlsx`);
     });
 });
