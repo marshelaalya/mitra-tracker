@@ -493,7 +493,7 @@ tbody tr.row-kendala  td:first-child { border-left: 3px solid #ef4444; }
 
 .dash-kpi-main {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
 }
 
@@ -531,7 +531,7 @@ tbody tr.row-kendala  td:first-child { border-left: 3px solid #ef4444; }
 }
 
 .dash-breakdown .summary-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     border-bottom: none;
 }
 
@@ -612,14 +612,14 @@ tbody tr.row-kendala  td:first-child { border-left: 3px solid #ef4444; }
 /* ─── RESPONSIVE GRID ─── */
 @media (max-width: 1100px) { 
     .summary-grid { grid-template-columns: repeat(4, 1fr); } 
-    .dash-kpi-main { grid-template-columns: repeat(3, 1fr); }
-    .dash-breakdown .summary-grid { grid-template-columns: repeat(3, 1fr); }
+    .dash-kpi-main { grid-template-columns: repeat(2, 1fr); }
+    .dash-breakdown .summary-grid { grid-template-columns: repeat(2, 1fr); }
     .summary-card { border-bottom: 1px solid var(--border); } 
 }
 @media (max-width: 640px)  { 
     .summary-grid { grid-template-columns: repeat(2, 1fr); } 
     .dash-kpi-main { grid-template-columns: 1fr; }
-    .dash-breakdown .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .dash-breakdown .summary-grid { grid-template-columns: 1fr; }
 }
 
 /* ─── RESPONSIVE TABLE ─── */

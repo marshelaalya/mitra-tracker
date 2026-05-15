@@ -50,7 +50,7 @@
 
             <!-- Professional Dashboard Section -->
             <div class="dashboard-section">
-                <!-- Utama: Total, Selesai, Belum Total -->
+                <!-- Utama -->
                 <div class="dash-kpi-main">
                     <div class="summary-card sc-total">
                         <div class="sc-icon">
@@ -60,6 +60,15 @@
                             <div class="sc-count" id="sc-total">0</div>
                             <div class="sc-title">Total Mitra</div>
                             <div class="sc-desc">Seluruh mitra yang perlu dikonfirmasi tawaran SE 2026</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-card sc-belum">
+                        <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg></div>
+                        <div class="sc-body">
+                            <div class="sc-count" id="sc-belum">0</div>
+                            <div class="sc-title">Belum Dihubungi</div>
+                            <div class="sc-desc">Mitra yang sama sekali belum dihubungi oleh operator</div>
                         </div>
                     </div>
                     
@@ -80,8 +89,8 @@
                         </div>
                         <div class="sc-body">
                             <div class="sc-count" id="sc-belum-total">0</div>
-                            <div class="sc-title">Belum Selesai</div>
-                            <div class="sc-desc">Mitra yang belum selesai (terdiri dari berbagai kendala)</div>
+                            <div class="sc-title">Terkendala / Proses</div>
+                            <div class="sc-desc">Total mitra yang sedang proses konfirmasi atau ada kendala</div>
                         </div>
                     </div>
                 </div>
@@ -89,18 +98,10 @@
                 <!-- Rincian Belum Selesai -->
                 <div class="dash-breakdown">
                     <div class="dash-breakdown-header">
-                        <h3>Rincian "Belum Selesai"</h3>
-                        <p>Pembagian status mitra yang belum melakukan konfirmasi</p>
+                        <h3>Rincian "Terkendala / Proses"</h3>
+                        <p>Pembagian status mitra yang belum selesai (selain Belum Dihubungi)</p>
                     </div>
                     <div class="summary-grid">
-                        <div class="summary-card sc-belum">
-                            <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg></div>
-                            <div class="sc-body">
-                                <div class="sc-count" id="sc-belum">0</div>
-                                <div class="sc-title">Belum Dihubungi</div>
-                                <div class="sc-desc">Mitra yang sama sekali belum dihubungi oleh operator</div>
-                            </div>
-                        </div>
                         <div class="summary-card sc-proses">
                             <div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></div>
                             <div class="sc-body">
