@@ -230,9 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const st = ph => getState(ph).status;
         const count = s => rows.filter(r => st(r.dataset.phone) === s).length;
 
-        document.getElementById('stat-total').textContent   = rows.length;
-        document.getElementById('stat-selesai').textContent = count('sudah_konfirm');
-        document.getElementById('stat-pending').textContent = count('menunggu');
+
 
         document.getElementById('sc-total').textContent    = rows.length;
         document.getElementById('sc-belum').textContent    = count('belum');
