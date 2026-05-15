@@ -289,4 +289,61 @@ document.addEventListener('DOMContentLoaded', () => {
         rows.forEach(r => { localStorage.removeItem('mt_' + r.dataset.phone); renderRow(r); });
         updateStats();
     });
+
+    /* ── Export Excel ── */
+    document.getElementById('btn-export-excel')?.addEventListener('click', () => {
+        const statusLabel = {
+            belum:         'Belum Dihubungi',
+            menunggu:      'Menunggu Balasan',
+            sudah_konfirm: 'Terkonfirmasi ✓',
+            perlu_verif:   'Perlu Verifikasi',
+            error_web:     'Kendala Akses Web',
+            tolak:         'Tawaran Belum Muncul',
+        };
+        const kendalaLabel = {
+            '':           'Tidak Ada',
+            perlu_verif:  'Perlu Verifikasi',
+            error_web:    'Belum Bisa Akses Web',
+            tolak:        'Tawaran Belum Muncul di Sobat',
+        };
+
+        // Header row
+        const wsData = [
+            ['No', 'Nama Mitra', 'Nomor HP', 'Status', 'Kendala']
+        ];
+
+        // Data rows
+        rows.forEach((tr, i) => {
+            const phone  = tr.dataset.phone;
+            const name   = tr.querySelector('.td-name').textContent.trim();
+            const state  = getState(phone);
+            const phone_display = formatPhone(phone);
+            wsData.push([
+                i + 1,
+                name,
+                phone_display,
+                statusLabel[state.status] || state.status,
+                kendalaLabel[state.kendala] || state.kendala || 'Tidak Ada',
+            ]);
+        });
+
+        // Buat workbook
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+        // Lebar kolom otomatis
+        ws['!cols'] = [
+            { wch: 5 },   // No
+            { wch: 28 },  // Nama
+            { wch: 20 },  // Nomor HP
+            { wch: 22 },  // Status
+            { wch: 30 },  // Kendala
+        ];
+
+        XLSX.utils.book_append_sheet(wb, ws, 'Mitra SE 2026');
+
+        // Nama file pakai tanggal hari ini
+        const today = new Date().toISOString().slice(0, 10);
+        XLSX.writeFile(wb, `Mitra_SE2026_${today}.xlsx`);
+    });
 });
